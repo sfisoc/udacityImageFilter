@@ -48,8 +48,6 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
         return res.status(400)
         .send(`image_url is required`);
       }
-
-      console.log(image_url);
   
       var pathToImage : string = await filterImageFromURL(image_url);
   
@@ -58,18 +56,26 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
         return res.status(422)
         .send(`Filter Image failed`);
       }
-  
-      res.sendFile(pathToImage);
+
+      res.sendFile(pathToImage, function(error: Error)
+      {
+
+        if(error)
+        {
+          return res.status(500).send("Internal server error");
+        }
+        else
+        {
+          deleteLocalFiles([pathToImage]);
+        }
+      }
+      );
       
-      console.log("Still on it deleting files")
-  
-      deleteLocalFiles([pathToImage]);
       
     } catch (error) {
 
-      console.error(error);
-
       return res.status(500).send("Internal server error");
+      
     }
     
   });
