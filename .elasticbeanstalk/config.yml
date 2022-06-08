@@ -1,0 +1,20 @@
+branch-defaults:
+  dev:
+    environment: udacityImageFilter-dev
+    group_suffix: null
+deploy:
+  artifact: ./www/Archive.zip
+global:
+  application_name: udacityImageFilter
+  branch: null
+  default_ec2_keyname: imagefilter
+  default_platform: Node.js 12 running on 64bit Amazon Linux 2
+  default_region: us-east-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: udatagram
+  repository: null
+  sc: git
+  workspace_type: Application
